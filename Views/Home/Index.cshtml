@@ -7,3 +7,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<ul>
+    <li>asp-area="Area"</li>
+    <li>asp-aciton="Action"</li>
+    <li>asp-controller="Product"</li>
+    <li>asp-route...="123"</li>
+    <li>asp-route="default"</li>
+</ul>
+
+@{
+    var routedata = new Dictionary<string, string>()
+    {
+        {"name", "traidat"},
+        {"abc", "xyz"}
+    };
+}
+
+<a asp-action="PlanetInfo" asp-controller="Planet" asp-route-id="3" asp-all-route-data="@routedata">
+    VD1
+</a>

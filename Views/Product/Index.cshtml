@@ -1,0 +1,12 @@
+@using MyFirstApp.Models
+
+@model List<ProductModel>
+
+<h1>Danh sach sp</h1>
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <li>@product.Name</li>
+    }
+</ul>

@@ -23,6 +23,7 @@ builder.Services.Configure<RazorViewEngineOptions>(options => {
 // builder.Services.AddSingleton<ProductService, ProductService>();
 // builder.Services.AddSingleton(typeof(ProductService));
 builder.Services.AddSingleton(typeof(ProductService),typeof(ProductService));
+builder.Services.AddSingleton<PlanetService>();
 
 var app = builder.Build();
 
@@ -44,11 +45,58 @@ app.UseAuthorization();
 
 app.AddStatusCodePage();
 
+
+
+app.MapRazorPages();
+
+app.MapGet("/sayhi", async (context) =>
+{
+    await context.Response.WriteAsync($"Hello MVC {DateTime.Now}");
+});
+
+// app.MapControllers
+// app.MapControllerRoute
+// app.MapDefaultControllerRoute
+// app.MapAreaControllerRoute
+
+// URL = start-here
+// controller -> 
+// action ->
+// area ->
+
+// [AcceptVerbs]
+
+// [Route]
+
+// [HttpGet]
+// [HttpPost]
+// [HttpPut]
+// [HttpDelete]
+// [HttpHead]
+// [HttpPatch]
+
+// Area
+
+app.MapControllerRoute(
+    name: "first",
+    pattern: "{url:regex(^((xemsanpham)|(viewproduct))$)}/{id:range(2,4)}",
+    defaults: new {
+        controller = "First",
+        action = "ViewProduct"
+    }
+);
+
+app.MapAreaControllerRoute(
+    name: "product",
+    areaName: "ProductManage",
+    pattern: "/{controller}/{action=Index}/{id?}"
+);
+
+
+// controller no area
 // URL: /{controller}/{action}/{id?}
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapRazorPages();
 
 app.Run();
